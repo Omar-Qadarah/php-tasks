@@ -35,7 +35,7 @@
 
             echo "========================================================================== <br><br>";
             $color = array (4 => 'white', 6 => 'green', 11=> 'red');
-            echo $color["4"] . "<br><br>";
+            echo reset($color) . "<br><br>";
             echo "========================================================================== <br><br>";
 
             $num=[1,2,3,4,5];
@@ -286,7 +286,40 @@
             }
             echo "</table>";
             echo "<br><br> ========================================================================== <br><br>";
+            $str = "Omar";
+
+            echo strtoupper($str) . "<br>" . strtolower($str) . "<br>" . ucfirst($str) . "<br>" . lcfirst($str) . "<br>" . ucwords($str);
+            echo "<br><br> ========================================================================== <br><br>";
+            $time = "085119";
+            $chunks = str_split($time, 2);
+            $output = implode(':', $chunks);
+            echo $output;
+            echo "<br><br> ========================================================================== <br><br>";
+            $line = "I am a full stack developer at orange coding academy";
+            $word = "oranges";
+            if (str_contains($line, $word)) {
+                echo "Word found.";
+            }else echo "Word not found.";
+            echo "<br><br> ========================================================================== <br><br>";
+            $filename = basename($_SERVER['PHP_SELF']);
+            echo $filename;
+
+            echo "<br><br> ========================================================================== <br><br>";
+            $email = "info@omar.com";
+            echo strstr($email, "@", true);
             
+            echo "<br><br> ========================================================================== <br><br>";
+            echo substr($filename, -3);
+            echo "<br><br> ========================================================================== <br><br>";
+
+            echo "<br><br> ========================================================================== <br><br>";
+            $sentence = "That new trainee is so genius.";
+            $word = "Our";
+            $arr = explode(" " ,$sentence);
+            $arr[0] = $word;
+            $sentence = implode(" ", $arr);
+            echo $sentence;
+            echo "<br><br> ========================================================================== <br><br>";
         ?>
 
 </body>
