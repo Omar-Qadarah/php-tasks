@@ -84,11 +84,18 @@
             // print_r($color_c);
             echo "========================================================================== <br><br>";
 
-            $p = 6;
-            if ($p % 2 !== 0) {
-                echo $p . " is a prime number." . "<br><br>";
-            }else echo $p . " is an even number." . "<br><br>";
-            echo "========================================================================== <br><br>";
+            $p = 2;
+            $a = true;
+            if($p>=2){
+                for($i= 2; $i<= sqrt($p); $i++){
+                if($p % $i == 0){  
+                    $a = false;
+                    break;
+                }}                
+                }else{$a=false;}
+                if($a){ echo $p . " is a prime number.";}else echo $p . " is not a prime number.";
+            
+            echo "<br><br>========================================================================== <br><br>";
             $string = "remove";
             echo strrev($string) . "<br><br>";
             echo "========================================================================== <br><br>";
@@ -101,13 +108,13 @@
             echo "x = " . $x . "     ||   y = " . $y . "<br><br>";
             echo "========================================================================== <br><br>";
             $arm = 407;
-            $ch = 0;
+            $cheak = 0;
             $digits = str_split($arm);
             foreach($digits as $digit ){
-                $ch += $digit**3;
+                $cheak += $digit**count($digits);
 
             }
-            if ($arm == $ch) {
+            if ($arm == $cheak) {
                 echo $arm . " is an armsronge number. <br><br>";
             } else echo $arm . " is not an armsronge number. <br><br>";
             echo "========================================================================== <br><br>";
