@@ -11,26 +11,26 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     if ($email === "" || $password === "") {
         $error = "Enter your email and password please.";
-    }
-
-    if ($user && password_verify($password, $user["password"])) {
-        session_regenerate_id(true);
-        $_SESSION["user_id"] = $user["id"];
-        $_SESSION["user_name"] = $user["name"];
-        header("Location: users.php");
-        exit;
-    } else {
-            $error = "Invalid email or password.";
-    }
-    
-    if ($error !== "") {
+    }elseif(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+        $error= 'Invalid email format e.g. omar@example.com';
+    }else{
         $stmt = $pdo->prepare("SELECT id, name, password FROM users WHERE email = ?");
         $stmt->execute([$email]);
         $user = $stmt->fetch();
+
+        if ($user && password_verify($password, $user["password"])) {
+            session_regenerate_id(true);
+            $_SESSION["user_id"] = $user["id"];
+            $_SESSION["user_name"] = $user["name"];
+            header("Location: users.php");
+            exit;
+        } else {
+            $error = "Invalid email or password.";
+        }
     }
 }
-
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -47,9 +47,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <?php endif; ?>
         <label for="email">Email</label>
         <input type="text" id="email" name="email" value="<?= htmlspecialchars($email) ?>">
-        <label for="password">password</label>
+        <label for="password">Password</label>
         <input type="password" id="password" name="password">        
-        <button type="submit" class="submit">Login</button>
+        <button type="submit">Login</button>
+        <a href="register.php" class="btn">Sign up</a>
     </form>
     
 </body>
