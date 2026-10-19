@@ -58,6 +58,7 @@
                 <th>ID</th>
                 <th>Category</th>
                 <th>Description</th>
+                <th >actions</th>
             </tr>
         </thead>
         <tbody>
@@ -67,11 +68,13 @@
                         <td><?= htmlspecialchars($category['id']) ?></td>
                         <td><?= htmlspecialchars($category['name']) ?></td>
                         <td><?= htmlspecialchars($category['description']) ?></td>
+                        <td><a href="edit_category.php?id=<?= urlencode($category['id']) ?>">Edit</a></td>
+                        <!-- <td><a href="delete_category.php?id= ?= urlencode($category['id']) ?>">Delete</a></td> -->
                     </tr>
                 <?php endforeach; ?>
             <?php else : ?>
                 <tr>
-                    <td colspan="3">No categories found yet.</td>
+                    <td colspan="4">No categories found yet.</td>
                 </tr>
             <?php endif; ?>
         </tbody>
