@@ -39,7 +39,7 @@
 </head>
 <body>
     <h1>Add Category</h1>
-    <form action="" method="post">
+    <form action="" method="post" class="form">
         <label for="name">Name</label>
         <input type="text" name="name" id="name" value="<?=htmlspecialchars($name)?>">
         <?php if(isset($errors['name'])): ?>
@@ -58,7 +58,8 @@
                 <th>ID</th>
                 <th>Category</th>
                 <th>Description</th>
-                <th >actions</th>
+                <th>Edit</th>
+                <th>Delete</th>
             </tr>
         </thead>
         <tbody>
@@ -68,13 +69,22 @@
                         <td><?= htmlspecialchars($category['id']) ?></td>
                         <td><?= htmlspecialchars($category['name']) ?></td>
                         <td><?= htmlspecialchars($category['description']) ?></td>
-                        <td><a href="edit_category.php?id=<?= urlencode($category['id']) ?>">Edit</a></td>
-                        <!-- <td><a href="delete_category.php?id= ?= urlencode($category['id']) ?>">Delete</a></td> -->
+                        <td>
+                            <a href="edit_category.php?id=<?= urlencode($category['id']) ?>">Edit</a>
+                        </td>
+                        <td>
+                            <form action="delete_category.php" method="POST" onsubmit="return confirm('Are you sure?');">
+
+                                <input type="hidden" name="id" value="<?= urlencode($category['id']) ?>">
+                                <button type="submit" class="delete">Delete</button>
+
+                            </form>
+                        </td>
                     </tr>
                 <?php endforeach; ?>
             <?php else : ?>
                 <tr>
-                    <td colspan="4">No categories found yet.</td>
+                    <td colspan="5">No categories found yet.</td>
                 </tr>
             <?php endif; ?>
         </tbody>
