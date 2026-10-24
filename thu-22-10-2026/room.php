@@ -1,4 +1,9 @@
 <?php
+session_start();
+if (!isset($_SESSION["student_id"])){
+    header("Location: login.php");
+    exit;
+}
 require_once __DIR__ . "/config/Database.php";
 require_once __DIR__ . "/classes/room.php";
 $database = new Database();
@@ -15,7 +20,12 @@ $rooms = $roomModel->getAll();
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="wrapper">
+        <p>Welcome, <?= htmlspecialchars($_SESSION["student_name"]) ?>!</p>
+        <a href="logout.php" class="btn">Log out</a>
+    </div>
     <h1>Our study rooms</h1>
+    <a href="book_room.php" class="booking bookingB">Book a Room</a>
     <div class="rooms-container">
         <?php if (empty($rooms)): ?>
             <p>No study rooms are available yet.</p>
@@ -28,9 +38,11 @@ $rooms = $roomModel->getAll();
                     <p class="capacity">
                         Capacity: <?= (int) $room['capacity'] ?> students
                     </p>
+                    <a href="book_room.php?room_id=<?= (int) $room['id'] ?>" class="booking">Book This Room</a>
                 </div>
             <?php endforeach; ?>
         <?php endif; ?>
     </div>
+    
 </body>
 </html>

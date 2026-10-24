@@ -1,3 +1,8 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 body {
     font-family: Arial, sans-serif;
     background: #f5f3eb;
@@ -45,7 +50,25 @@ input {
     padding: 10px;
     margin-top: 6px;
 }
-button {
+.btn,.booking{
+    display: block;
+    text-decoration: none;
+    margin-top: 20px;
+    padding: 12px;
+    background: #ff4102;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    text-align: center;
+}
+.booking{
+    background: #243b2a;
+}
+.bookingB{
+    min-width: 150px;
+    width: 10%;
+}
+button{
     width: 100%;
     margin-top: 20px;
     padding: 12px;
@@ -53,10 +76,16 @@ button {
     color: white;
     border: none;
     cursor: pointer;
+    border-radius: 10px;
 }
 .error {
     color: #b42318;
 }
 .success {
     color: #18753b;
+}
+.wrapper{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }

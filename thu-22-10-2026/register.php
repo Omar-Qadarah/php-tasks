@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once __DIR__ ."/config/Database.php";
 require_once __DIR__ ."/classes/student.php";
 $database = new Database();
@@ -47,6 +48,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $firstname = "";
                 $lastname = "";
                 $email = "";
+                $studentData = $student->findByEmail($email);               
+                session_regenerate_id(true);
+                $_SESSION["student_id"] = (int) $studentData["id"];
+                $_SESSION["student_name"] = $studentData["first_name"] . " " . $studentData["last_name"];
                 header("Location: room.php");
                 exit;
             }catch(Exception $e){
