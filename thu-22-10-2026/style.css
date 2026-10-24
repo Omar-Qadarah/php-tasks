@@ -1,0 +1,62 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f3eb;
+    color: #243b2a;
+    margin: 0;
+    padding: 30px;
+}
+h1 {
+    text-align: center;
+}
+.rooms-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 20px;
+    max-width: 1100px;
+    margin: 30px auto;
+}
+.room-card {
+    background: white;
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+}
+.room-card h2 {
+    margin-top: 0;
+}
+.capacity {
+    color: #58735c;
+}
+
+form {
+    max-width: 420px;
+    margin: 30px auto;
+    padding: 25px;
+    background: white;
+    border-radius: 12px;
+}
+label {
+    display: block;
+    margin-top: 15px;
+}
+input {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 10px;
+    margin-top: 6px;
+}
+button {
+    width: 100%;
+    margin-top: 20px;
+    padding: 12px;
+    background: #243b2a;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+.error {
+    color: #b42318;
+}
+.success {
+    color: #18753b;
+}

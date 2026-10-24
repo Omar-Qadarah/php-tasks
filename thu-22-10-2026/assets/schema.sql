@@ -1,0 +1,29 @@
+CREATE DATABASE IF NOT EXISTS study_rooms
+    CHARACTER SET utf8mb4
+    COLLATE utf8mb4_unicode_ci;
+USE study_rooms;
+
+CREATE TABLE IF NOT EXISTS students (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    first_name VARCHAR(50) NOT NULL,
+    last_name VARCHAR(50) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE
+);ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+CREATE TABLE IF NOT EXISTS rooms (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    title VARCHAR(100) NOT NULL UNIQUE,
+    capacity INT NOT NULL
+);ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+CREATE TABLE IF NOT EXISTS bookings (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    student_id INT NOT NULL,
+    room_id INT NOT NULL,
+    start_time DATETIME NOT NULL,
+    end_time DATETIME NOT NULL,
+    FOREIGN KEY (student_id) REFERENCES students(id),
+    FOREIGN KEY (room_id) REFERENCES rooms(id)
+);ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
