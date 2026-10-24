@@ -70,7 +70,7 @@
                         <td><?= htmlspecialchars($category['name']) ?></td>
                         <td><?= htmlspecialchars($category['description']) ?></td>
                         <td>
-                            <a href="edit_category.php?id=<?= urlencode($category['id']) ?>">Edit</a>
+                            <a href="edit_category.php?id=<?= urlencode($category['id']) ?>" class="btn">Edit</a>
                         </td>
                         <td>
                             <form action="delete_category.php" method="POST" onsubmit="return confirm('Are you sure?');">
