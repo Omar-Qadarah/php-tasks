@@ -104,56 +104,57 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book a Study Room</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="assets/style.css">
     </head>
     <body>
-        <h1>Book a Study Room</h1>
-    
-        <?php foreach ($errors as $error): ?>
-            <p class="error"><?= htmlspecialchars($error) ?></p>
-        <?php endforeach; ?>
+ 
+        <main class="container">
+            <section class="form-card">
+                <h1>Book a Study Room</h1>
+                <p>Choose your room and preferred time slot.</p>
+                <?php if ($success !== ""): ?>
+                    <div class="message success">
+                        <?= htmlspecialchars($success) ?>
+                    </div>
+                <?php endif; ?>
+                                    
+                <?php if (!empty($errors)): ?>
+                    <div class="message error">
+                        <?php foreach ($errors as $error): ?>
+                            <p><?= htmlspecialchars($error) ?></p>
+                        <?php endforeach; ?>
+                    </div>
+                <?php endif; ?>                
         
-        <?php if ($success !== ""): ?>
-            <p class="success"><?= htmlspecialchars($success) ?></p>
-        <?php endif; ?>
+                <form action="book_room.php" method="POST">
+                    <div class="form-group">
+                        <label for="room_id">Study Room</label>
+                        <select id="room_id" name="room_id" required>
+                            <option value="">-- Select a room --</option>
         
-        <form method="POST" action="book_room.php">
-            <label for="room_id">Choose a room</label>
+                            <?php foreach ($rooms as $roomItem): ?>
+                                <option value="<?= (int) $roomItem['id'] ?>" <?= (string) $roomId === (string) $roomItem['id'] ? 'selected' : '' ?>>
+                                    <?= htmlspecialchars($roomItem['title']) ?> (Capacity: <?= (int) $roomItem['capacity'] ?>)
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="start_time">Start Time</label>
+                        <input type="datetime-local" id="start_time" name="start_time" value="<?= htmlspecialchars($startTime) ?>" required>
+                    </div>
         
-            <select name="room_id" id="room_id" required>
-                <option value="">-- Select a room --</option>
+                    <div class="form-group">
+                        <label for="end_time">End Time</label>
+                        <input type="datetime-local" id="end_time" name="end_time" value="<?= htmlspecialchars($endTime) ?>" required>
+                    </div>
         
-                <?php foreach ($rooms as $roomItem): ?>
-                    <option
-                        value="<?= (int) $roomItem['id'] ?>"
-                        <?= (string) $roomId === (string) $roomItem['id'] ? 'selected' : '' ?>
-                    >
-                        <?= htmlspecialchars($roomItem['title']) ?> (Capacity: <?= (int) $roomItem['capacity'] ?>)
-                    </option>
-                <?php endforeach; ?>
-            </select>
-                
-            <label for="start_time">Start time</label>
-            <input
-                type="datetime-local"
-                name="start_time"
-                id="start_time"
-                value="<?= htmlspecialchars($startTime) ?>"
-                required
-            >
-                
-            <label for="end_time">End time</label>
-            <input
-                type="datetime-local"
-                name="end_time"
-                id="end_time"
-                value="<?= htmlspecialchars($endTime) ?>"
-                required
-            >
-                
-            <button type="submit">Book Room</button>
-        </form>
-                
-        <p><a href="room.php">Back to rooms</a></p>
+                    <button type="submit" class="btn">Book Room</button>
+                    <a href="room.php" class="btn">Home page</a>
+                </form>
+            </section>
+        </main>
+
     </body>
 </html>

@@ -44,11 +44,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }else{
             try{
                 $student->register($firstname, $lastname, $email, $password);
+                $studentData = $student->findByEmail($email);               
                 $success = "Registered successfuly";
                 $firstname = "";
                 $lastname = "";
                 $email = "";
-                $studentData = $student->findByEmail($email);               
                 session_regenerate_id(true);
                 $_SESSION["student_id"] = (int) $studentData["id"];
                 $_SESSION["student_name"] = $studentData["first_name"] . " " . $studentData["last_name"];
@@ -62,35 +62,70 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Registration</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Register | StudySpace</title>
+    <link rel="stylesheet" href="assets/style.css">
 </head>
-<body>
-    <h1 style="text-align: center;">Create Your Account</h1>
+<body class="auth-page">
 
-    <form method="POST" action="register.php">
-        <?php foreach($errors as $error):?>
-            <p class="error"><?=htmlspecialchars($error) ?></p>        
-        <?php endforeach;?>
-        <?php if($success !==""):?>
-            <p class="success"><?=htmlspecialchars($success)?></p>
-        <?php endif;?>
-        <label for="firstname">First name</label>
-        <input type="text" name="firstname" id="firstname" value="<?=htmlspecialchars($firstname)?>" required>
-        <label for="lastname">Last name</label>
-        <input type="text" name="lastname" id="lastname" value="<?=htmlspecialchars($lastname)?>" required>
-        <label for="email">Email</label>
-        <input type="email" name="email" id="email" value="<?=htmlspecialchars($email)?>" required>
-        <label for="password">Password</label>
-        <input type="password" name="password" id="password" minlength="8" required>
-        <label for="password">Confirm password</label>
-        <input type="password" name="confirmPassword" id="confirmPassword" required>
-        <button>submit</button>
-    </form>
+    <main class="auth-container">
+        <section class="auth-card">
+
+            <div class="auth-brand">
+                <h1>Create Account</h1>
+                <p>Join StudySpace and reserve your room.</p>
+            </div>
+            <?php if (!empty($errors)): ?>
+                <div class="auth-message auth-error">
+                    <?php foreach($errors as $error):?>
+                        <p class="error"><?=htmlspecialchars($error) ?></p>        
+                    <?php endforeach;?>
+                    <?php if($success !==""):?>
+                        <p class="success"><?=htmlspecialchars($success)?></p>
+                    <?php endif;?>
+                </div>
+            <?php endif; ?>           
+
+            <form action="register.php" method="POST" class="auth-form">
+
+                <div class="form-group">
+                    <label for="firstname">First Name</label>
+                    <input type="text" id="firstname" name="firstname" autocomplete="given-name" value="<?=htmlspecialchars($firstname)?>" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="lastname">Last Name</label>
+                    <input type="text" id="lastname" name="lastname" autocomplete="family-name" value="<?=htmlspecialchars($lastname)?>" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input  type="email" id="email" name="email" autocomplete="email" value="<?=htmlspecialchars($email)?>" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" autocomplete="new-password" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Confirm password</label>
+                    <input type="password" name="confirmPassword" id="confirmPassword" required>
+                </div>
+
+                <button type="submit" class="btn">
+                    Create Account
+                </button>
+
+            </form>
+
+            <p class="auth-footer"> Already have an account? <a href="login.php">Login</a></p>
+        </section>
+    </main>
+
 </body>
 </html>

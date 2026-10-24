@@ -64,4 +64,16 @@ class Booking
         return $stmt->fetchAll();
     }
 
+    public function cancelBooking($bookingId, $studentId)
+    {
+        $sql = "DELETE FROM bookings
+                WHERE id = ? AND student_id = ?";
+    
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([$bookingId, $studentId]);
+    
+        return $stmt->rowCount();
+    }
+
+
 }

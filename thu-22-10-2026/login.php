@@ -43,46 +43,51 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student login</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <h1 style="text-align: center;">Welcome Back</h1>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Login | StudySpace</title>
+        <link rel="stylesheet" href="assets/style.css">
+    </head>
+    <body class="auth-page">
+        <main class="auth-container">
+            <section class="auth-card">
 
-    <form method="POST" action="login.php" novalidate>
-        <?php foreach ($errors as $error): ?>
-            <p class="error">
-                <?= htmlspecialchars($error) ?>
-            </p>
-        <?php endforeach; ?>
+                <div class="auth-brand">
+                    <h1>Welcome Back</h1>
+                    <p>Sign in to book your study space.</p>
+                </div>
 
-        <label for="email">Email</label>
-        <input
-            type="email"
-            name="email"
-            id="email"
-            value="<?= htmlspecialchars($email) ?>"
-            required
-        >
+                <?php if (!empty($errors)): ?>
+                    <div class="auth-message auth-error">
+                        <?php foreach ($errors as $error): ?>
+                            <p><?= htmlspecialchars($error) ?></p>
+                        <?php endforeach; ?>
+                    </div>
+                <?php endif; ?>
 
-        <label for="password">Password</label>
-        <input
-            type="password"
-            name="password"
-            id="password"
-            required
-        >
+                <form action="login.php" method="POST" class="auth-form">
 
-        <button type="submit">Log In</button>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" autocomplete="email" value="<?=htmlspecialchars($email)?>" required>
+                    </div>
 
-        <p>Don't have an account?
-            <a href="register.php">Register here</a>
-        </p>
-    </form>
-</body>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" autocomplete="current-password" required>
+                    </div>
+
+                    <button type="submit" class="btn">Login</button>
+
+                </form>
+
+                <p class="auth-footer">Don't have an account? <a href="register.php">Create one</a></p>
+            </section>
+        </main>                
+    </body>
 </html>
+
