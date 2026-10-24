@@ -26,6 +26,7 @@ $rooms = $roomModel->getAll();
     </div>
     <h1>Our study rooms</h1>
     <a href="book_room.php" class="booking bookingB">Book a Room</a>
+    <a href="my_bookings.php" class="booking bookingB">My bookings</a>
     <div class="rooms-container">
         <?php if (empty($rooms)): ?>
             <p>No study rooms are available yet.</p>

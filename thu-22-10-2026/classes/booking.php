@@ -44,6 +44,24 @@ class Booking
         $endTime
         ]);
     }
+    
+    public function getByStudent($studentId)
+    {
+        $sql = "SELECT
+                    bookings.id,
+                    bookings.start_time,
+                    bookings.end_time,
+                    rooms.title AS room_title,
+                    rooms.capacity
+                FROM bookings
+                INNER JOIN rooms ON bookings.room_id = rooms.id
+                WHERE bookings.student_id = ?
+                ORDER BY bookings.start_time ASC";
 
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([$studentId]);
+
+        return $stmt->fetchAll();
+    }
 
 }
