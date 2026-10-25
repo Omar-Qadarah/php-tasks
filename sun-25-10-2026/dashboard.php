@@ -24,6 +24,30 @@ $result=$userModel -> getAllUsers();
 <body>
     <h1>Welcome to dash</h1>
     <a href="logout.php" class="btn">logout</a>
+
+    <h2>Add New User</h2>
+
+    <form id="createUserForm">
+        <div>
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+
+        <div>
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+
+        <div>
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required minlength="8" >
+        </div>
+
+        <button type="submit">Create User</button>
+    </form>
+
+    <p id="formMessage" role="status"></p>
+
     <table>
         <thead>
             <tr>
@@ -38,6 +62,7 @@ $result=$userModel -> getAllUsers();
             
         </tbody>
     </table>
+    <script src="assets/dashboard.js"></script>
     
 </body>
 </html>
