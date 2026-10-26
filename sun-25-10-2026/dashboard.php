@@ -48,6 +48,38 @@ $result=$userModel -> getAllUsers();
 
     <p id="formMessage" role="status"></p>
 
+    <h2>Update User</h2>
+    
+    <form id="updateUserForm" hidden>
+        <input type="hidden" id="updateUserId">
+    
+        <div>
+            <label for="updateName">Name</label>
+            <input type="text" id="updateName" required>
+        </div>
+    
+        <div>
+            <label for="updateEmail">Email</label>
+            <input type="email" id="updateEmail" required>
+        </div>
+    
+        <div>
+            <label for="updatePassword">New Password (optional)</label>
+            <input
+                type="password"
+                id="updatePassword"
+                minlength="8"
+                placeholder="Leave empty to keep current password"
+            >
+        </div>
+    
+        <button type="submit">Save Changes</button>
+        <button type="button" id="cancelUpdate">Cancel</button>
+    </form>
+    
+    <p id="updateMessage" role="status"></p>
+
+
     <table>
         <thead>
             <tr>

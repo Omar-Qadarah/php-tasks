@@ -103,6 +103,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             type="email"
             id="email"
             name="email"
+            value="<?=htmlspecialchars($email)?>"
             required
         >
 
