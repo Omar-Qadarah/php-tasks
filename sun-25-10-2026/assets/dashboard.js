@@ -17,6 +17,16 @@ function loadUsers() {
 
             usersBody.innerHTML = "";
 
+            if (result.data.length === 0) {
+                const emptyRow = document.createElement("tr");
+                const emptyCell = document.createElement("td");
+                emptyCell.colSpan = 4;
+                emptyCell.className = "empty";
+                emptyCell.textContent = "No users yet.";
+                emptyRow.appendChild(emptyCell);
+                usersBody.appendChild(emptyRow);
+            }
+
             result.data.forEach(function (user) {
                 const row = document.createElement("tr");
 
@@ -33,6 +43,7 @@ function loadUsers() {
 
                 const deleteButton = document.createElement("button");
                 deleteButton.textContent = "Delete";
+                deleteButton.className = "btn-danger btn-small";
 
                 deleteButton.addEventListener("click", function () {
                     const confirmed = confirm(
@@ -55,6 +66,7 @@ function loadUsers() {
 
                 const updateButton = document.createElement("button");
                 updateButton.textContent = "Update";
+                updateButton.className = "btn-small";
 
                 updateButton.addEventListener("click", function () {
                     document.getElementById("updateUserId").value = user.id;
@@ -64,6 +76,8 @@ function loadUsers() {
                 
                     document.getElementById("updateMessage").textContent = "";
                     document.getElementById("updateUserForm").hidden = false;
+                    document.getElementById("updateCard").hidden = false;
+                    document.getElementById("updateCard").scrollIntoView({ behavior: "smooth", block: "center" });
                 });
 
                 updateCell.appendChild(updateButton);
@@ -112,7 +126,7 @@ createUserForm.addEventListener("submit", function (event) {
             }
 
             formMessage.textContent = responseData.result.message;
-            formMessage.style.color = "green";
+            formMessage.className = "message success";
 
             createUserForm.reset();
 
@@ -121,7 +135,7 @@ createUserForm.addEventListener("submit", function (event) {
         })
         .catch(function (error) {
             formMessage.textContent = error.message;
-            formMessage.style.color = "red";
+            formMessage.className = "message error";
         });
 });
 
@@ -170,21 +184,23 @@ updateUserForm.addEventListener("submit", function (event) {
             }
 
             updateMessage.textContent = responseData.result.message;
-            updateMessage.style.color = "green";
+            updateMessage.className = "message success";
 
             updateUserForm.hidden = true;
+            document.getElementById("updateCard").hidden = false;
 
             loadUsers();
         })
         .catch(function (error) {
             updateMessage.textContent = error.message;
-            updateMessage.style.color = "red";
+            updateMessage.className = "message error";
         });
 });
 
 document.getElementById("cancelUpdate").addEventListener("click", function () {
     updateUserForm.hidden = true;
     updateMessage.textContent = "";
+    document.getElementById("updateCard").hidden = true;
 });
 
 function deleteUser(id) {

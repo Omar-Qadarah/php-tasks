@@ -51,59 +51,61 @@ if (!$Result) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update User</title>
+    <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
 
-    <h1>Update User</h1>
+    <header class="topbar">
+        <h1>Update User</h1>
+        <a href="dashboard.php" class="btn">Back</a>
+    </header>
 
-    <?php if ($error !== ""): ?>
-        <p style="color: red;">
-            <?= htmlspecialchars($error) ?>
-        </p>
-    <?php endif; ?>
+    <main class="container narrow">
+        <section class="card">
 
-    <form action="update.php" method="POST">
+            <?php if ($error !== ""): ?>
+                <p class="error"><?= htmlspecialchars($error) ?></p>
+            <?php endif; ?>
 
-        <input type="hidden" name="id" value="<?= (int)$id ?>">
+            <form action="update.php" method="POST">
 
-        <label for="name">Name:</label>
-        <input
-            type="text"
-            id="name"
-            name="name"
-            value="<?= htmlspecialchars($_POST['name'] ?? $Result['name']) ?>"
-            required
-        >
+                <input type="hidden" name="id" value="<?= (int)$id ?>">
 
-        <br><br>
+                <label for="name">Name</label>
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value="<?= htmlspecialchars($_POST['name'] ?? $Result['name']) ?>"
+                    required
+                >
 
-        <label for="email">Email:</label>
-        <input
-            type="email"
-            id="email"
-            name="email"
-            value="<?= htmlspecialchars($_POST['email'] ?? $Result['email']) ?>"
-            required
-        >
+                <label for="email">Email</label>
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value="<?= htmlspecialchars($_POST['email'] ?? $Result['email']) ?>"
+                    required
+                >
 
-        <br><br>
+                <label for="password">New Password</label>
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    minlength="8"
+                    required
+                >
 
-        <label for="password">New Password:</label>
-        <input
-            type="password"
-            id="password"
-            name="password"
-            minlength="8"
-            required
-        >
+                <div class="form-actions">
+                    <button type="submit">Save Changes</button>
+                    <a href="dashboard.php" class="btn btn-secondary">Cancel</a>
+                </div>
 
-        <br><br>
-
-        <button type="submit">Save Changes</button>
-
-        <a href="dashboard.php">Cancel</a>
-
-    </form>
+            </form>
+        </section>
+    </main>
 
 </body>
 </html>

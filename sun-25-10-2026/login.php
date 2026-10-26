@@ -4,6 +4,7 @@ require_once "db.php";
 require_once "user.php";
 
 $error = "";
+$email = "";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $email = trim($_POST["email"] ?? "");
@@ -35,61 +36,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #0D1C42;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-        }
-
-        form {
-            background: #FCF1D0;
-            padding: 30px;
-            width: 320px;
-            border-radius: 10px;
-        }
-
-        h2 {
-            text-align: center;
-            color: #010736;
-        }
-
-        label {
-            display: block;
-            margin-top: 15px;
-        }
-
-        input {
-            width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            box-sizing: border-box;
-        }
-
-        button {
-            width: 100%;
-            padding: 12px;
-            margin-top: 20px;
-            background: #010736;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-
-        .error {
-            color: #c62828;
-            text-align: center;
-        }
-    </style>
+    <link rel="stylesheet" href="assets/style.css">
 </head>
 
-<body>
+<body class="auth-page">
 
-    <form action="login.php" method="POST">
+    <form action="login.php" method="POST" class="auth-card">
 
         <h2>Login</h2>
         <?php if (!empty($error)): ?>
@@ -115,8 +67,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             required
         >
 
-        <button type="submit">Login</button>
-        <a href="register.php" class="btn">register</a>
+        <button type="submit" class="btn-block">Login</button>
+
+        <p class="auth-footer">No account yet? <a href="register.php">Register</a></p>
 
     </form>
 
